@@ -643,4 +643,138 @@
     </div>
   </div>
   
-  <!-- Navigation Buttons for Email Previ
+  <!-- Navigation Buttons for Email Preview -->
+  <div class="nav-buttons" id="email-nav-buttons" style="display: none;">
+    <button class="nav-button back-to-selection">Back to Selection</button>
+    <button class="nav-button start-over">Start Over</button>
+  </div>
+
+  <script>
+    // DOM Elements
+    const nameScreen = document.getElementById('name-input-screen');
+    const emailTypeScreen = document.getElementById('email-type-screen');
+    const nameForm = document.getElementById('name-form');
+    const nameInput = document.getElementById('name-input');
+    const userNameDisplay = document.getElementById('user-name-display');
+    const backButton = document.getElementById('back-button');
+    const emailTypeButtons = document.querySelectorAll('.email-type-button');
+    const personalizedNameElements = document.querySelectorAll('.personalized-name');
+    const emergencyEmail = document.getElementById('emergency-email');
+    const reengagementEmail = document.getElementById('reengagement-email');
+    const impactEmail = document.getElementById('impact-email');
+    const emailNavButtons = document.getElementById('email-nav-buttons');
+    const backToSelectionButton = document.querySelector('.back-to-selection');
+    const startOverButton = document.querySelector('.start-over');
+    
+    // Handle viewport height for mobile browsers (address the "100vh" issue on mobile)
+    function setAppHeight() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    window.addEventListener('resize', setAppHeight);
+    setAppHeight();
+    
+    // Event Listeners
+    nameForm.addEventListener('submit', handleNameSubmit);
+    backButton.addEventListener('click', backToNameScreen);
+    emailTypeButtons.forEach(button => {
+      button.addEventListener('click', showSelectedEmail);
+    });
+    backToSelectionButton.addEventListener('click', backToEmailSelection);
+    startOverButton.addEventListener('click', resetApp);
+    
+    // Auto-focus the name input when page loads for better UX
+    window.addEventListener('load', () => {
+      nameInput.focus();
+    });
+    
+    // Functions
+    function handleNameSubmit(e) {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      
+      if (name) {
+        // Update all personalized name elements
+        personalizedNameElements.forEach(element => {
+          element.textContent = name;
+        });
+        
+        // Show the user's name in the selection screen
+        userNameDisplay.textContent = name;
+        
+        // Hide name screen, show email type selection
+        nameScreen.style.display = 'none';
+        emailTypeScreen.style.display = 'block';
+      }
+    }
+    
+    function backToNameScreen() {
+      nameScreen.style.display = 'block';
+      emailTypeScreen.style.display = 'none';
+    }
+    
+    function showSelectedEmail(e) {
+      const emailType = e.currentTarget.dataset.type;
+      
+      // Hide selection screen
+      emailTypeScreen.style.display = 'none';
+      
+      // Hide all emails
+      emergencyEmail.style.display = 'none';
+      reengagementEmail.style.display = 'none';
+      impactEmail.style.display = 'none';
+      
+      // Show selected email
+      if (emailType === 'emergency') {
+        emergencyEmail.style.display = 'block';
+      } else if (emailType === 'reengagement') {
+        reengagementEmail.style.display = 'block';
+      } else if (emailType === 'impact') {
+        impactEmail.style.display = 'block';
+      }
+      
+      // Show navigation buttons
+      emailNavButtons.style.display = 'flex';
+      
+      // Scroll to top of email
+      window.scrollTo(0, 0);
+    }
+    
+    function backToEmailSelection() {
+      // Hide all emails and navigation
+      emergencyEmail.style.display = 'none';
+      reengagementEmail.style.display = 'none';
+      impactEmail.style.display = 'none';
+      emailNavButtons.style.display = 'none';
+      
+      // Show selection screen
+      emailTypeScreen.style.display = 'block';
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+    
+    function resetApp() {
+      // Reset the form
+      nameForm.reset();
+      
+      // Hide all screens except name input
+      emailTypeScreen.style.display = 'none';
+      emergencyEmail.style.display = 'none';
+      reengagementEmail.style.display = 'none';
+      impactEmail.style.display = 'none';
+      emailNavButtons.style.display = 'none';
+      
+      // Show name input screen
+      nameScreen.style.display = 'block';
+      
+      // Focus on name input
+      nameInput.focus();
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
