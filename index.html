@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalized Email Showcase</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    /* Name Input Screen */
+    #name-input-screen {
+      background: linear-gradient(to bottom right, #990000, #660000);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    #name-input-screen h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    
+    #name-input-screen p {
+      text-align: center;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+    
+    #name-form {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    #name-form label {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    
+    #name-form input {
+      padding: 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 5px;
+      color: white;
+      margin-bottom: 20px;
+    }
+    
+    #name-form input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    #name-form button {
+      background-color: #cc0000;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    #name-form button:hover {
+      background-color: #bb0000;
+    }
+    
+    /* Email Type Selection Screen */
+    #email-type-screen {
+      background: linear-gradient(to bottom right, #990000, #660000);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+    
+    #email-type-screen h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+    
+    #email-type-screen p {
+      text-align: center;
+      margin-bottom: 20px;
+      opacity: 0.8;
+      font-size: 14px;
+    }
+    
+    .email-type-button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background-color: rgba(0, 0, 0, 0.3);
+      border: none;
+      color: white;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .email-type-button:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+      transform: translateX(5px);
+    }
+    
+    .email-type-title {
+      font-weight: bold;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+    
+    .email-type-desc {
+      opacity: 0.9;
+      font-size: 13px;
+    }
+    
+    #back-button {
+      margin-top: 15px;
+      background-color: transparent;
+      color: white;
+      border: 1px solid white;
+      padding: 10px;
+      border-radius: 25px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    
+    #back-button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Email Preview */
+    .email-preview {
+      background-color: #fff;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: none;
+      margin-bottom: 20px;
+    }
+    
+    .email-header {
+      background-color: #cc0000;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    
+    .email-header h2 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    
+    .email-header p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+    
+    .email-content {
+      padding: 20px;
+      color: #333;
+    }
+    
+    .email-greeting {
+      margin-bottom: 15px;
+    }
+    
+    .main-paragraph {
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .emergency-notice {
+      color: #cc0000;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 20px 0;
+    }
+    
+    .bullet-list {
+      list-style-type: disc;
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .bullet-list li {
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    
+    .section-title {
+      font-weight: bold;
+      font-size: 16px;
+      margin: 25px 0 15px 0;
+    }
+    
+    .action-button {
+      display: block;
+      background-color: #cc0000;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 25px;
+      margin: 25px auto;
+      width: 100%;
+      max-width: 300px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .quote-box {
+      margin: 25px 0;
+      background-color: #f9f9f9;
+      padding: 15px;
+      font-style: italic;
+      border-left: 5px solid #cc0000;
+    }
+    
+    .quote-source {
+      margin-top: 10px;
+      font-style: normal;
+      font-weight: bold;
+    }
+    
+    .email-footer {
+      background-color: #f9f9f9;
+      padding: 15px;
+      text-align: center;
+      color: #666;
+      font-size: 10px;
+    }
+    
+    /* Navigation buttons */
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .nav-button {
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .back-to-selection {
+      background-color: white;
+      color: #990000;
+    }
+    
+    .back-to-selection:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .start-over {
+      background-color: #cc0000;
+      color: white;
+    }
+    
+    .start-over:hover {
+      background-color: #bb0000;
+    }
+    
+    /* Reengagement Email */
+    .reengagement-header {
+      background-color: #0066cc;
+    }
+    
+    .reengagement-section {
+      margin: 20px 0;
+    }
+    
+    .task-box {
+      background-color: #f0f7ff;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+    
+    .task-title {
+      color: #0066cc;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .reengagement-button {
+      background-color: #0066cc;
+    }
+    
+    .reengagement-quote {
+      border-left-color: #0066cc;
+    }
+    
+    /* Impact Email */
+    .impact-header {
+      background-color: #007700;
+    }
+    
+    .testimonial {
+      background-color: #f0fff0;
+      padding: 15px;
+      border-left: 5px solid #007700;
+      margin: 15px 0;
+      font-style: italic;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    
+    .stat-box {
+      background-color: #f5f5f5;
+      padding: 15px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    
+    .stat-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #007700;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+    }
+    
+    .impact-task {
+      background-color: #f0fff0;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+    
+    .impact-button {
+      background-color: #007700;
+    }
+  </style>
+</head>
+<body>
+  <!-- Name Input Screen -->
+  <div id="name-input-screen">
+    <h1>Personalized Email Preview</h1>
+    <p>Enter your name to see how we personalize outreach to our volunteer mappers</p>
+    <form id="name-form">
+      <label for="name-input">Your Name</label>
+      <input type="text" id="name-input" placeholder="Enter your name" required>
+      <button type="submit">See Personalized Examples</button>
+    </form>
+  </div>
+  
+  <!-- Email Type Selection Screen -->
+  <div id="email-type-screen">
+    <h1>Welcome, <span id="user-name-display"></span></h1>
+    <p>Select an email type to see how we would reach out to you</p>
+    
+    <button class="email-type-button" data-type="emergency">
+      <div class="email-type-title">🚨 Emergency Response</div>
+      <div class="email-type-desc">Urgent request for your mapping expertise during a crisis</div>
+    </button>
+    
+    <button class="email-type-button" data-type="reengagement">
+      <div class="email-type-title">🔄 Re-engagement</div>
+      <div class="email-type-desc">Invitation back after a period of inactivity</div>
+    </button>
+    
+    <button class="email-type-button" data-type="impact">
+      <div class="email-type-title">💓 Impact Update</div>
+      <div class="email-type-desc">See the real-world results of your mapping contributions</div>
+    </button>
+    
+    <button id="back-button">Change Name</button>
+  </div>
+  
+  <!-- Emergency Email Preview -->
+  <div id="emergency-email" class="email-preview">
+    <div class="email-header">
+      <h2>VOLUNTEER CLOUD EMERGENCY RESPONSE</h2>
+      <p>March 3, 2025</p>
+    </div>
+    
+    <div class="email-content">
+      <p class="email-greeting">Dear <strong class="personalized-name">John</strong>,</p>
+      
+      <p class="main-paragraph">
+        A catastrophic typhoon has struck the exact area you helped map last November - <strong>Southeast Asia</strong>. 
+        Your previous work in the Mekong Delta region is now proving invaluable as emergency teams reference it, 
+        but further urgent mapping is needed as conditions have dramatically changed.
+      </p>
+      
+      <div class="emergency-notice">THIS IS A TIME-SENSITIVE EMERGENCY</div>
+      
+      <ul class="bullet-list">
+        <li>The <strong>72-hour critical rescue window</strong> began just 8 hours ago</li>
+        <li>Your specifically mapped area around <strong>Vinh Long Province</strong> now has <strong>7 villages</strong> completely cut off</li>
+        <li>The bridge networks you previously documented have been <strong>severely damaged</strong></li>
+        <li><strong>Your personal expertise in riverine communities</strong> is desperately needed by rescue teams on the ground</li>
+      </ul>
+      
+      <p>Based on your mapping history and skills, you are specifically qualified to help with this crisis.</p>
+      
+      <a href="#" class="action-button">START MAPPING NOW</a>
+      
+      <h3 class="section-title">Why You Specifically?</h3>
+      
+      <p class="main-paragraph">
+        Your detailed mapping of the <strong>canal networks in the eastern sector</strong> last quarter created 
+        the baseline data teams are using now. Your eye for detail in identifying <strong>narrow waterways and alternative routes</strong> 
+        is exactly the expertise needed as floodwaters have altered the landscape.
+      </p>
+      
+      <div class="quote-box">
+        "When I saw this was <span class="personalized-name">John</span>'s mapping region, I immediately requested we reach out. 
+        Their exceptional work mapping the narrow canals between Vinh Long and Ca Mau saved lives 
+        during last year's flooding. The precision of their work identifying elevated evacuation 
+        routes is exactly what we need now as these same areas are underwater again."
+        <div class="quote-source">- Maria Chen, Response Coordinator</div>
+      </div>
+    </div>
+    
+    <div class="email-footer">
+      <p>Note: This is a demonstration showing how our personalized volunteer outreach system would work in a real crisis.</p>
+      <p>Volunteer Cloud | Making maps that save lives | volunteer-cloud.org</p>
+    </div>
+  </div>
+  
+  <!-- Re-engagement Email Preview -->
+  <div id="reengagement-email" class="email-preview">
+    <div class="email-header reengagement-header">
+      <h2>VOLUNTEER CLOUD</h2>
+      <p>We've Missed Your Contributions</p>
+    </div>
+    
+    <div class="email-content">
+      <p class="email-greeting">Dear <strong class="personalized-name">John</strong>,</p>
+      
+      <p class="main-paragraph">
+        It's been 47 days since your last mapping contribution, and we wanted to reach out. 
+        Your expertise in <strong>coastal road networks</strong> has been invaluable to our community, 
+        and we've noticed your absence.
+      </p>
+      
+      <h3 class="section-title">Your Previous Impact Continues</h3>
+      
+      <p class="main-paragraph">
+        Even while you've been away, your mapping work has continued to make a difference:
+      </p>
+      
+      <ul class="bullet-list">
+        <li>Your detailed mapping of <strong>Port City District</strong> was used in <strong>3 recovery operations</strong> last month</li>
+        <li>Medical teams referenced your road access points to reach <strong>5 remote communities</strong></li>
+        <li>Your specialized tags for <strong>flood-prone areas</strong> have been adopted as a community standard</li>
+      </ul>
+      
+      <h3 class="section-title">A Task Matched to Your Skills</h3>
+      
+      <p class="main-paragraph">
+        Based on your mapping history and exceptional attention to detail, we have a specific task we believe 
+        would be perfect for your return:
+      </p>
+      
+      <div class="task-box">
+        <div class="task-title">Western Harbor Area - Road Network Update</div>
+        <p>This area was recently affected by construction, and we need someone with your road network expertise to validate changes.</p>
+        <p><strong>Estimated time:</strong> 30 minutes</p>
+        <p><strong>Difficulty:</strong> Moderate</p>
+        <p><strong>Impact:</strong> Will help 3 aid organizations plan delivery routes</p>
+      </div>
+      
+      <a href="#" class="action-button reengagement-button">VIEW RECOMMENDED TASK</a>
+      
+      <div class="quote-box reengagement-quote">
+        "I'd recognize <span class="personalized-name">John</span>'s mapping style anywhere - the precision around intersections is unmatched. 
+        We've missed having their expertise in the community. This new harbor area would really benefit 
+        from their road network skills."
+        <div class="quote-source">- Thomas Reed, Mapping Team Lead</div>
+      </div>
+    </div>
+    
+    <div class="email-footer">
+      <p>This personalized re-engagement message is tailored to bring valued contributors back to active status.</p>
+      <p>Volunteer Cloud | Making maps that save lives | volunteer-cloud.org</p>
+    </div>
+  </div>
+  
+  <!-- Impact Email Preview -->
+  <div id="impact-email" class="email-preview">
+    <div class="email-header impact-header">
+      <h2>YOUR MAPPING IMPACT REPORT</h2>
+      <p>The Real-World Difference You've Made</p>
+    </div>
+    
+    <div class="email-content">
+      <p class="email-greeting">Dear <strong class="personalized-name">John</strong>,</p>
+      
+      <p class="main-paragraph">
+        Last month, you spent <strong>4.5 hours</strong> mapping areas in <strong>Eastern Madagascar</strong>. 
+        We wanted to show you exactly how those hours translated into real-world impact.
+      </p>
+      
+      <h3 class="section-title">Your Maps In Action</h3>
+      
+      <div class="testimonial">
+        "After the cyclone hit our village, we had no way to communicate with the outside world. The road was gone.
+        But rescue teams found us anyway. They showed me later - they used maps that you helped create to identify 
+        our location and plan an alternate route to reach us. My family and 14 others were evacuated because of this."
+        <div class="quote-source">- Mila Rasoamanarivo, Village Elder, Eastern Madagascar</div>
+      </div>
+      
+      <h3 class="section-title">Impact By The Numbers</h3>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-number">387</div>
+          <div class="stat-label">People Reached With Aid</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Medical Supply Routes</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Critical Facilities Located</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">82%</div>
+          <div class="stat-label">More Efficient Response</div>
+        </div>
+      </div>
+      
+      <h3 class="section-title">Your Next Opportunity</h3>
+      
+      <p class="main-paragraph">
+        A region with similar characteristics to ones you've mapped before needs attention:
+      </p>
+      
+      <div class="impact-task">
+        <div class="task-title">Northern Coast Validation Project</div>
+        <p>Coastal communities need mapping before the upcoming storm season</p>
+        <p><strong>Estimated impact:</strong> Will protect approx. 450 people</p>
+      </div>
+      
+      <a href="#" class="action-button impact-button">MAP WHERE IT MATTERS</a>
+    </div>
+    
+    <div class="email-footer">
+      <p>This impact report showcases the real-world results of volunteer mapping contributions.</p>
+      <p>Volunteer Cloud | Making maps that save lives | volunteer-cloud.org</p>
+    </div>
+  </div>
+  
+  <!-- Navigation Buttons for Email Preview -->
+  <div class="nav-buttons" id="email-nav-buttons" style="display: none;">
+    <button class="nav-button back-to-selection">Back to Selection</button>
+    <button class="nav-button start-over">Start Over</button>
+  </div>
+
+  <script>
+    // DOM Elements
+    const nameScreen = document.getElementById('name-input-screen');
+    const emailTypeScreen = document.getElementById('email-type-screen');
+    const nameForm = document.getElementById('name-form');
+    const nameInput = document.getElementById('name-input');
+    const userNameDisplay = document.getElementById('user-name-display');
+    const backButton = document.getElementById('back-button');
+    const emailTypeButtons = document.querySelectorAll('.email-type-button');
+    const personalizedNameElements = document.querySelectorAll('.personalized-name');
+    const emergencyEmail = document.getElementById('emergency-email');
+    const reengagementEmail = document.getElementById('reengagement-email');
+    const impactEmail = document.getElementById('impact-email');
+    const emailNavButtons = document.getElementById('email-nav-buttons');
+    const backToSelectionButton = document.querySelector('.back-to-selection');
+    const startOverButton = document.querySelector('.start-over');
+    
+    // Event Listeners
+    nameForm.addEventListener('submit', handleNameSubmit);
+    backButton.addEventListener('click', backToNameScreen);
+    emailTypeButtons.forEach(button => {
+      button.addEventListener('click', showSelectedEmail);
+    });
+    backToSelectionButton.addEventListener('click', backToEmailSelection);
+    startOverButton.addEventListener('click', resetApp);
+    
+    // Functions
+    function handleNameSubmit(e) {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      
+      if (name) {
+        // Update all personalized name elements
+        personalizedNameElements.forEach(element => {
+          element.textContent = name;
+        });
+        
+        // Show the user's name in the selection screen
+        userNameDisplay.textContent = name;
+        
+        // Hide name screen, show email type selection
+        nameScreen.style.display = 'none';
+        emailTypeScreen.style.display = 'block';
+      }
+    }
+    
+    function backToNameScreen() {
+      nameScreen.style.display = 'block';
+      emailTypeScreen.style.display = 'none';
+    }
+    
+    function showSelectedEmail(e) {
+      const emailType = e.currentTarget.dataset.type;
+      
+      // Hide selection screen
+      emailTypeScreen.style.display = 'none';
+      
+      // Hide all emails
+      emergencyEmail.style.display = 'none';
+      reengagementEmail.style.display = 'none';
+      impactEmail.style.display = 'none';
+      
+      // Show selected email
+      if (emailType === 'emergency') {
+        emergencyEmail.style.display = 'block';
+      } else if (emailType === 'reengagement') {
+        reengagementEmail.style.display = 'block';
+      } else if (emailType === 'impact') {
+        impactEmail.style.display = 'block';
+      }
+      
+      // Show navigation buttons
+      emailNavButtons.style.display = 'flex';
+    }
+    
+    function backToEmailSelection() {
+      // Hide all emails and navigation
+      emergencyEmail.style.display = 'none';
+      reengagementEmail.style.display = 'none';
+      impactEmail.style.display = 'none';
+      emailNavButtons.style.display = 'none';
+      
+      // Show selection screen
+      emailTypeScreen.style.display = 'block';
+    }
+    
+    function resetApp() {
+      // Reset the form
+      nameForm.reset();
+      
+      // Hide all screens except name input
+      emailTypeScreen.style.display = 'none';
+      emergencyEmail.style.display = 'none';
+      reengagementEmail.style.display = 'none';
+      impactEmail.style.display = 'none';
+      emailNavButtons.style.display = 'none';
+      
+      // Show name input screen
+      nameScreen.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
