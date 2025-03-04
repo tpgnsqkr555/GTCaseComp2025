@@ -19,30 +19,32 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 15px;
+      width: 100%;
     }
     
     /* Name Input Screen */
     #name-input-screen {
       background: linear-gradient(to bottom right, #990000, #660000);
       color: white;
-      padding: 30px;
+      padding: 25px 20px;
       border-radius: 10px;
       width: 100%;
-      max-width: 500px;
+      max-width: 400px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     
     #name-input-screen h1 {
       text-align: center;
       margin-bottom: 20px;
-      font-size: 24px;
+      font-size: 22px;
     }
     
     #name-input-screen p {
       text-align: center;
       margin-bottom: 20px;
       opacity: 0.9;
+      font-size: 15px;
     }
     
     #name-form {
@@ -62,6 +64,7 @@
       border-radius: 5px;
       color: white;
       margin-bottom: 20px;
+      font-size: 16px; /* Larger for better touch targets */
     }
     
     #name-form input::placeholder {
@@ -72,11 +75,12 @@
       background-color: #cc0000;
       color: white;
       border: none;
-      padding: 12px;
+      padding: 14px; /* Larger for better touch targets */
       border-radius: 25px;
       cursor: pointer;
       font-weight: bold;
       transition: background-color 0.3s;
+      font-size: 16px;
     }
     
     #name-form button:hover {
@@ -87,10 +91,10 @@
     #email-type-screen {
       background: linear-gradient(to bottom right, #990000, #660000);
       color: white;
-      padding: 30px;
+      padding: 25px 20px;
       border-radius: 10px;
       width: 100%;
-      max-width: 500px;
+      max-width: 400px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       display: none;
     }
@@ -98,7 +102,7 @@
     #email-type-screen h1 {
       text-align: center;
       margin-bottom: 10px;
-      font-size: 24px;
+      font-size: 22px;
     }
     
     #email-type-screen p {
@@ -116,7 +120,7 @@
       border: none;
       color: white;
       padding: 15px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       border-radius: 5px;
       cursor: pointer;
       transition: all 0.3s;
@@ -143,11 +147,12 @@
       background-color: transparent;
       color: white;
       border: 1px solid white;
-      padding: 10px;
+      padding: 12px;
       border-radius: 25px;
       cursor: pointer;
       width: 100%;
       transition: background-color 0.3s;
+      font-size: 15px;
     }
     
     #back-button:hover {
@@ -158,7 +163,7 @@
     .email-preview {
       background-color: #fff;
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
       border-radius: 5px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -174,7 +179,7 @@
     }
     
     .email-header h2 {
-      font-size: 18px;
+      font-size: 16px;
       margin-bottom: 5px;
     }
     
@@ -184,8 +189,9 @@
     }
     
     .email-content {
-      padding: 20px;
+      padding: 18px 16px;
       color: #333;
+      font-size: 15px;
     }
     
     .email-greeting {
@@ -200,7 +206,7 @@
     .emergency-notice {
       color: #cc0000;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
       margin: 20px 0;
     }
     
@@ -230,10 +236,11 @@
       border-radius: 25px;
       margin: 25px auto;
       width: 100%;
-      max-width: 300px;
+      max-width: 250px;
       font-weight: bold;
       text-decoration: none;
       cursor: pointer;
+      font-size: 15px;
     }
     
     .quote-box {
@@ -242,6 +249,8 @@
       padding: 15px;
       font-style: italic;
       border-left: 5px solid #cc0000;
+      font-size: 14px;
+      line-height: 1.5;
     }
     
     .quote-source {
@@ -263,15 +272,19 @@
       display: flex;
       gap: 10px;
       margin-top: 10px;
+      width: 100%;
+      max-width: 500px;
     }
     
     .nav-button {
-      padding: 10px 20px;
+      padding: 12px 0;
       border-radius: 25px;
       border: none;
       cursor: pointer;
       font-weight: bold;
       transition: background-color 0.3s;
+      flex: 1;
+      font-size: 14px;
     }
     
     .back-to-selection {
@@ -306,6 +319,7 @@
       padding: 15px;
       border-radius: 5px;
       margin: 15px 0;
+      font-size: 14px;
     }
     
     .task-title {
@@ -333,6 +347,8 @@
       border-left: 5px solid #007700;
       margin: 15px 0;
       font-style: italic;
+      font-size: 14px;
+      line-height: 1.5;
     }
     
     .stats-grid {
@@ -344,20 +360,20 @@
     
     .stat-box {
       background-color: #f5f5f5;
-      padding: 15px;
+      padding: 12px 8px;
       text-align: center;
       border-radius: 5px;
     }
     
     .stat-number {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
       color: #007700;
       margin-bottom: 5px;
     }
     
     .stat-label {
-      font-size: 12px;
+      font-size: 11px;
     }
     
     .impact-task {
@@ -365,10 +381,53 @@
       padding: 15px;
       border-radius: 5px;
       margin: 15px 0;
+      font-size: 14px;
     }
     
     .impact-button {
       background-color: #007700;
+    }
+    
+    /* Mobile-specific adjustments */
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      
+      .email-preview {
+        border-radius: 10px;
+      }
+      
+      .email-content {
+        padding: 15px 12px;
+      }
+      
+      .bullet-list {
+        margin-left: 15px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .quote-box, .testimonial {
+        padding: 12px;
+        font-size: 13px;
+      }
+      
+      .action-button {
+        max-width: 100%;
+        padding: 12px;
+      }
+      
+      .nav-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .nav-button {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -584,112 +643,4 @@
     </div>
   </div>
   
-  <!-- Navigation Buttons for Email Preview -->
-  <div class="nav-buttons" id="email-nav-buttons" style="display: none;">
-    <button class="nav-button back-to-selection">Back to Selection</button>
-    <button class="nav-button start-over">Start Over</button>
-  </div>
-
-  <script>
-    // DOM Elements
-    const nameScreen = document.getElementById('name-input-screen');
-    const emailTypeScreen = document.getElementById('email-type-screen');
-    const nameForm = document.getElementById('name-form');
-    const nameInput = document.getElementById('name-input');
-    const userNameDisplay = document.getElementById('user-name-display');
-    const backButton = document.getElementById('back-button');
-    const emailTypeButtons = document.querySelectorAll('.email-type-button');
-    const personalizedNameElements = document.querySelectorAll('.personalized-name');
-    const emergencyEmail = document.getElementById('emergency-email');
-    const reengagementEmail = document.getElementById('reengagement-email');
-    const impactEmail = document.getElementById('impact-email');
-    const emailNavButtons = document.getElementById('email-nav-buttons');
-    const backToSelectionButton = document.querySelector('.back-to-selection');
-    const startOverButton = document.querySelector('.start-over');
-    
-    // Event Listeners
-    nameForm.addEventListener('submit', handleNameSubmit);
-    backButton.addEventListener('click', backToNameScreen);
-    emailTypeButtons.forEach(button => {
-      button.addEventListener('click', showSelectedEmail);
-    });
-    backToSelectionButton.addEventListener('click', backToEmailSelection);
-    startOverButton.addEventListener('click', resetApp);
-    
-    // Functions
-    function handleNameSubmit(e) {
-      e.preventDefault();
-      const name = nameInput.value.trim();
-      
-      if (name) {
-        // Update all personalized name elements
-        personalizedNameElements.forEach(element => {
-          element.textContent = name;
-        });
-        
-        // Show the user's name in the selection screen
-        userNameDisplay.textContent = name;
-        
-        // Hide name screen, show email type selection
-        nameScreen.style.display = 'none';
-        emailTypeScreen.style.display = 'block';
-      }
-    }
-    
-    function backToNameScreen() {
-      nameScreen.style.display = 'block';
-      emailTypeScreen.style.display = 'none';
-    }
-    
-    function showSelectedEmail(e) {
-      const emailType = e.currentTarget.dataset.type;
-      
-      // Hide selection screen
-      emailTypeScreen.style.display = 'none';
-      
-      // Hide all emails
-      emergencyEmail.style.display = 'none';
-      reengagementEmail.style.display = 'none';
-      impactEmail.style.display = 'none';
-      
-      // Show selected email
-      if (emailType === 'emergency') {
-        emergencyEmail.style.display = 'block';
-      } else if (emailType === 'reengagement') {
-        reengagementEmail.style.display = 'block';
-      } else if (emailType === 'impact') {
-        impactEmail.style.display = 'block';
-      }
-      
-      // Show navigation buttons
-      emailNavButtons.style.display = 'flex';
-    }
-    
-    function backToEmailSelection() {
-      // Hide all emails and navigation
-      emergencyEmail.style.display = 'none';
-      reengagementEmail.style.display = 'none';
-      impactEmail.style.display = 'none';
-      emailNavButtons.style.display = 'none';
-      
-      // Show selection screen
-      emailTypeScreen.style.display = 'block';
-    }
-    
-    function resetApp() {
-      // Reset the form
-      nameForm.reset();
-      
-      // Hide all screens except name input
-      emailTypeScreen.style.display = 'none';
-      emergencyEmail.style.display = 'none';
-      reengagementEmail.style.display = 'none';
-      impactEmail.style.display = 'none';
-      emailNavButtons.style.display = 'none';
-      
-      // Show name input screen
-      nameScreen.style.display = 'block';
-    }
-  </script>
-</body>
-</html>
+  <!-- Navigation Buttons for Email Previ
